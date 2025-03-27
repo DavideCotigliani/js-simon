@@ -1,7 +1,8 @@
 // definisco le variabili e recupero gli elementi per iniziare il countdown
 const countdown = document.getElementById('countdown');
-let seconds = 30;
+let seconds = 10;
 countdown.innerText= seconds--
+const instructions = document.getElementById ('instructions')
 
 // variabili per i numeri casuali e recupero degli elementi
 const numberslist = document.getElementById('numbers-list')
@@ -19,11 +20,14 @@ randomNumbers()
 
 //strutturo il corpo del programma del countdown
 const interval = setInterval(function(){
-if(seconds != -1){
+if(seconds != 0){
 countdown.innerText= seconds
 }
 else{
     clearInterval(interval)
+    countdown.innerText= 'Inserisci i numeri che hai visto precedentemente'
+    instructions.remove()
+    numberslist.remove()
 }
 //per decrementare i secondi
 seconds--
