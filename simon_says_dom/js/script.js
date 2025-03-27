@@ -7,7 +7,12 @@ countdown.innerText= seconds--
 const numberslist = document.getElementById('numbers-list')
 
 function randomNumbers (){
-    numberslist.innerText= Math.floor(Math.random() * 5) +1 ;
+    let numbers = [];
+    for (i = 0; i<5; i++){
+        const randoNum = Math.floor(Math.random() * 49) + 1;
+        numbers.push(randoNum)
+    }
+    numberslist.innerHTML=numbers.join(' ')
 }
 randomNumbers()
 
