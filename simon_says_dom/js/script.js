@@ -1,8 +1,9 @@
 // definisco le variabili e recupero gli elementi per iniziare il countdown
 const countdown = document.getElementById('countdown');
-let seconds = 10;
+let seconds = 30;
 countdown.innerText= seconds--
 const instructions = document.getElementById ('instructions')
+const form = document.getElementById('answers-form')
 
 // variabili per i numeri casuali e recupero degli elementi
 const numberslist = document.getElementById('numbers-list')
@@ -32,3 +33,8 @@ else{
 //per decrementare i secondi
 seconds--
 },1000)
+
+const appear = setTimeout(function(){
+form.classList.remove("d-none")
+
+},30000)
