@@ -4,11 +4,14 @@ let seconds = 5;
 countdown.innerText= seconds--
 const instructions = document.getElementById ('instructions')
 const form = document.getElementById('answers-form')
-const button = document.querySelector('.btn btn-primary mt-2 d-block mx-auto')
-const number = document.querySelector('.form-control')
+const button = document.querySelector('button');
+const numberInputs = document.querySelector('.form-control')
+const message = document.getElementById ('message')
 
 // variabili per i numeri casuali e recupero degli elementi
 const numberslist = document.getElementById('numbers-list')
+
+let randomNumbersList =[];
 
 function randomNumbers (){
     let numbers = [];
@@ -16,9 +19,10 @@ function randomNumbers (){
         const randoNum = Math.floor(Math.random() * 49) + 1;
         numbers.push(randoNum)
     }
+    randomNumbersList = numbers;
     numberslist.innerHTML=numbers.join(' ')
 }
-randomNumbers()
+randomNumbers();
 
 //strutturo il corpo del programma del countdown
 const interval = setInterval(function(){
@@ -41,8 +45,29 @@ form.classList.remove("d-none")
 
 },5000)
 
-button.addEventListener ('click',function(){
-let correctNumbers = [];
-let correctCount = 0;
+// Evento click sul bottone
+button.addEventListener('click', function(event) {
+    event.preventDefault();  // Evita il comportamento predefinito del form
 
-})
+    let correctNumbers = [];
+    let incorrectNumbers = [];
+    let correctCount = 0;
+
+    for (let i = 0; i < numberInputs.length; i++) {
+    const userInput = parseInt(numberInputs[i].value, 10);
+    if (randomNumbersList.includes(userInput)) {
+        correctNumbers.push(userInput);
+        correctCount++;
+    }
+    
+}
+
+if (correctCount > 0) {
+    message.innerHTML = `Hai indovinato ${correctCount} numeri: ${correctNumbers.join(', ')}`;
+    message.style.color = 'green'; 
+} 
+else {
+    message.innerHTML = 'Non hai indovinato nessun numero.';
+    message.style.color = 'red'; 
+}
+});
