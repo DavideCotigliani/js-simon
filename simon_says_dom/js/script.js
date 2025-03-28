@@ -20,10 +20,17 @@ function randomNumbers (min,max,tot){
     // definisco l'array vuoto che contiene i numeri casuali
     let numbers = [];
     // genero i 5 numeri casuali
-    for (i = 0; i<tot; i++){
-        const randoNum = Math.floor(Math.random() * (max - min + 1) ) + min;
-        // inserisco il numero generato nell'array
-        numbers.push(randoNum) // vado a mettere DENTRO numbers, un randoNum
+    // for (i = 0; i<tot; i++){
+    //     const randoNum = Math.floor(Math.random() * (max - min + 1) ) + min;
+    //     // inserisco il numero generato nell'array
+    //     numbers.push(randoNum) // vado a mettere DENTRO numbers, un randoNum
+    // }
+    while (numbers.length < tot){   // il ciclo while non ha un numero definito di iterazioni
+        const num = Math.floor(Math.random()* (max - min + 1)) + min;
+        // se l'array numbers non include il numero generato, allora lo inserisco
+        if (!numbers.includes(num)){
+            numbers.push(num);
+        }
     }
     // restituisco l'array
     return numbers;
@@ -72,9 +79,15 @@ button.addEventListener('click', function(event) {
         const input = inputFields[i];
         
         const value = parseInt(input.value);
-        
-        //vado ad inserire il numero nell'array
+        if(isNaN(value)=== false && value>= min && value<= max && userNumbers.includes(value)==false){
+             //vado ad inserire il numero nell'array
         userNumbers.push(value);
+        }
+    }
+    if(userNumbers.lenght !== totalNumbers){
+        message.classList.add ('text-danger');
+        message.innerText = 'Ci sono elementi non validi o duplicati';
+        return;
     }
     // definisco un array che contiene i numeri indovinati
     const guessed = [];
